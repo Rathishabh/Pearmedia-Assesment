@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Coupon Wheel</title>
+  <style>
+    /* CSS styles for the coupon wheel */
+    #wheel {
+      width: 200px;
+      height: 200px;
+      background-color: #ccc;
+      border-radius: 50%;
+      position: relative;
+      transition: transform 4s;
+    }
+    #wheel .pointer {
+      width: 10px;
+      height: 100px;
+      background-color: #000;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .coupon-prize {
+      display: none;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: center;
+    }
+    #try-again {
+      display: none;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="wheel">
+    <div class="pointer"></div>
+  </div>
+  <div id="try-again">Try again!</div>
+  <div class="coupon-prize"></div>
+
+  <script>
+    // JavaScript code for the coupon wheel functionality
+    const wheel = document.getElementById('wheel');
+    const pointer = document.querySelector('.pointer');
+    const tryAgainMsg = document.getElementById('try-again');
+    const couponPrize = document.querySelector('.coupon-prize');
+
+    let rotation = 0;
+    let spinCount = 0;
+    const prize = 'Gift Card';
+    wheel.addEventListener('click', spinWheel);
+
+    function spinWheel() {
+      if (spinCount === 0) {
+        rotation += 360;
+        wheel.style.transform = `rotate(${rotation}deg)`;
+        tryAgainMsg.style.display = 'block';
+        spinCount++;
+      } else if (spinCount === 1) {
+        rotation += 360;
+        wheel.style.transform = `rotate(${rotation}deg)`;
+	tryAgainMsg.style.display = 'none';
+        pointer.style.display = 'block';
+        couponPrize.style.display = 'block';
+        couponPrize.textContent = prize;
+	spinCount++;
+      }
+	else if(spinCount === 2){
+		window.location.reload();
+	}
+    }
+
+  </script>
+</body>
+</html>
